@@ -1,28 +1,28 @@
 // reducers.ts
-import { ADD_PRODUCT, REMOVE_PRODUCT, UPDATE_FIELD } from "./constants";
+import { Action } from "./actions";
 import { ProductFormInitialState, ProductsState } from "./interfaces";
 
 const reducer = (
   state: ProductsState = ProductFormInitialState,
-  action: any
+  action: Action
 ) => {
   switch (action.type) {
-    case ADD_PRODUCT:
+    case "addProduct":
       return {
         ...state,
-        productForm: [...state.productForm, action.payload],
+        productForm: [...state.productForm, action.newProduct],
       };
-    case REMOVE_PRODUCT:
+    case "removeProduct":
       return {
         ...state,
-        productForm: state.productForm.filter((_, i) => i !== action.payload),
+        productForm: state.productForm.filter((_, i) => i !== action.index),
       };
-    case UPDATE_FIELD:
+    case "updateField":
       return {
         ...state,
         productForm: state.productForm.map((product, indx) =>
-          indx === action.payload.index
-            ? { ...product, [action.payload.field]: action.payload.value }
+          indx === action.index
+            ? { ...product, [action.field]: action.value }
             : product
         ),
       };
@@ -30,5 +30,4 @@ const reducer = (
       return state;
   }
 };
-
 export default reducer;
