@@ -9,6 +9,10 @@ export interface Action {
   payload?: any;
 }
 
+export type Actions = {
+  dispatch: (action: Action) => void;
+};
+
 export const addProduct = (newProduct: Product) => ({
   type: ADD_PRODUCT,
   payload: newProduct,
