@@ -1,75 +1,53 @@
-// Home.tsx
-import { useState } from "react";
-import { useStore } from "@/Zustand/store";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Profile } from "@/Zustand/interfaces";
-export default function Home() {
-  const addField = useStore((state) => state.addField);
-  const [formValues, setFormValues] = useState<Profile>({
-    firstName: "",
-    lastName: "",
-    contact: "",
-    address: "",
-  });
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormValues((prevValues) => ({
-      ...prevValues,
-      [name]: value,
-    }));
+import { useStore } from "@/zustand/store";
+import { Product } from "@/zustand/interfaces";
+import ProductItem from "@/PageComponents/ProductItem";
+
+const Home = () => {
+  const { productForm, addProduct, removeProduct, updateField } = useStore();
+
+  const handleAddProduct = () => {
+    addProduct({
+      prodName: "",
+      cost: "",
+      quantity: "",
+      units: "",
+    });
+    console.log(productForm);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    addField(formValues);
-    console.log(formValues);
+  const handleRemoveProduct = (index: number) => {
+    removeProduct(index);
+  };
+
+  const handleUpdateField = (
+    index: number,
+    field: keyof Product,
+    value: string
+  ) => {
+    updateField(index, field, value);
   };
 
   return (
-    <div className="h-screen flex justify-center items-center">
-      <div>
-        <h2>ZUSTAND FORM</h2>
-        <form onSubmit={handleSubmit}>
-          <Label>
-            First Name
-            <Input
-              type="text"
-              name="firstName"
-              value={formValues.firstName}
-              onChange={handleChange}
-            />
-          </Label>
-          <Label>
-            Last Name
-            <Input
-              type="text"
-              name="lastName"
-              value={formValues.lastName}
-              onChange={handleChange}
-            />
-          </Label>
-          <Label>
-            Contact
-            <Input
-              type="text"
-              name="contact"
-              value={formValues.contact}
-              onChange={handleChange}
-            />
-          </Label>
-          <Label>
-            Address
-            <Input
-              type="text"
-              name="address"
-              value={formValues.address}
-              onChange={handleChange}
-            />
-          </Label>
-          <button type="submit">Submit</button>
-        </form>
-      </div>
+    <div className="max-w-screen-md mx-auto p-6">
+      <h2 className="text-2xl font-bold mb-4">Product List</h2>
+      {productForm.map((product, index) => (
+        <div key={index} className="bg-white shadow-md rounded-md p-4 mb-4">
+          <ProductItem
+            product={product}
+            index={index}
+            onUpdateField={handleUpdateField}
+            onRemoveProduct={handleRemoveProduct}
+          />
+        </div>
+      ))}
+      <button
+        className="bg-blue text-white px-4 py-2 rounded-md"
+        onClick={handleAddProduct}
+      >
+        Add Product
+      </button>
     </div>
   );
-}
+};
+
+export default Home;

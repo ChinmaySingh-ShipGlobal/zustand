@@ -1,6 +1,14 @@
-export interface Profile {
-  firstName: string;
-  lastName: string;
-  contact: string;
-  address: string;
+export interface Product {
+  prodName: string;
+  cost: string;
+  quantity: string;
+  units: string;
 }
+
+export interface ProductsState {
+  productForm: Product[];
+}
+
+export const ProductFormInitialState: ProductsState = {
+  productForm: [{ prodName: "", cost: "", quantity: "", units: "" }],
+};

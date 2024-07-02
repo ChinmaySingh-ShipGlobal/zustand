@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
-  content: ["./src/**/*.{html,js,ts,jsx,tsx}"],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   blocklist: ["example_class"], //TODO Add restrictions for specific classes
   prefix: "",
   theme: {
@@ -26,8 +26,18 @@ module.exports = {
       white: "#ffffff",
       black: "#040404",
       primary: "#1F499F",
-      blue: { DEFAULT: "#1F499F", 50: "#EBF0FC", 100: "#E9EFFF", 300: "#ADC8FF" },
-      orange: { DEFAULT: "#F69F00", 50: "#FFF5EF", 100: "#FFCE85", dark: "#F59300" },
+      blue: {
+        DEFAULT: "#1F499F",
+        50: "#EBF0FC",
+        100: "#E9EFFF",
+        300: "#ADC8FF",
+      },
+      orange: {
+        DEFAULT: "#F69F00",
+        50: "#FFF5EF",
+        100: "#FFCE85",
+        dark: "#F59300",
+      },
       red: "#DD1717",
       green: "#007A48",
       purple: "#6840C4",
