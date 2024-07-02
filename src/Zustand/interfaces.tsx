@@ -12,3 +12,7 @@ export interface ProductsState {
 export const ProductFormInitialState: ProductsState = {
   productForm: [{ prodName: "", cost: "", quantity: "", units: "" }],
 };
+
+export interface StoreState extends ProductsState {
+  //   dispatch: React.Dispatch<any>;
+}

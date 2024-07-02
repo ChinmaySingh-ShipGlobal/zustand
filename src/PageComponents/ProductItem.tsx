@@ -1,3 +1,4 @@
+// ProductItem.tsx
 import React from "react";
 import { Product } from "@/zustand/interfaces";
 
@@ -29,6 +30,7 @@ const ProductItem: React.FC<Props> = ({
         onChange={(e) => handleInputChange("prodName", e)}
         placeholder="Product Name"
         className="border p-1"
+        required
       />
       <input
         type="text"
@@ -36,6 +38,7 @@ const ProductItem: React.FC<Props> = ({
         onChange={(e) => handleInputChange("cost", e)}
         placeholder="Cost"
         className="border p-1"
+        required
       />
       <input
         type="text"
@@ -43,6 +46,7 @@ const ProductItem: React.FC<Props> = ({
         onChange={(e) => handleInputChange("quantity", e)}
         placeholder="Quantity"
         className="border p-1"
+        required
       />
       <input
         type="text"
@@ -50,6 +54,7 @@ const ProductItem: React.FC<Props> = ({
         onChange={(e) => handleInputChange("units", e)}
         placeholder="Units"
         className="border p-1"
+        required
       />
       <button
         onClick={() => onRemoveProduct(index)}

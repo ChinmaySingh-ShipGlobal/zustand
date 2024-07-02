@@ -1,22 +1,28 @@
+// Home.tsx
+import React from "react";
 import { useStore } from "@/zustand/store";
 import { Product } from "@/zustand/interfaces";
+import { addProduct, removeProduct, updateField } from "@/zustand/actions";
 import ProductItem from "@/PageComponents/ProductItem";
 
-const Home = () => {
-  const { productForm, addProduct, removeProduct, updateField } = useStore();
+const Home: React.FC = () => {
+  const { productForm } = useStore((state) => state);
+  const dispatch = useStore((state) => state.dispatch);
 
   const handleAddProduct = () => {
-    addProduct({
-      prodName: "",
-      cost: "",
-      quantity: "",
-      units: "",
-    });
+    dispatch(
+      addProduct({
+        prodName: "",
+        cost: "",
+        quantity: "",
+        units: "",
+      })
+    );
     console.log(productForm);
   };
 
   const handleRemoveProduct = (index: number) => {
-    removeProduct(index);
+    dispatch(removeProduct(index));
   };
 
   const handleUpdateField = (
@@ -24,7 +30,7 @@ const Home = () => {
     field: keyof Product,
     value: string
   ) => {
-    updateField(index, field, value);
+    dispatch(updateField(index, field, value));
   };
 
   return (

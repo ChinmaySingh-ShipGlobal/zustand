@@ -1,7 +1,21 @@
-//actions.tsx
-import { UPDATE_FIELD } from "./constants";
+import { ADD_PRODUCT, REMOVE_PRODUCT, UPDATE_FIELD } from "./constants";
+import { Product } from "./interfaces";
 
-export const updateProfileField = (fieldName: string, value: string) => ({
+export const addProduct = (newProduct: Product) => ({
+  type: ADD_PRODUCT,
+  payload: newProduct,
+});
+
+export const removeProduct = (index: number) => ({
+  type: REMOVE_PRODUCT,
+  payload: index,
+});
+
+export const updateField = (
+  index: number,
+  field: keyof Product,
+  value: string
+) => ({
   type: UPDATE_FIELD,
-  payload: { fieldName, value },
+  payload: { index, field, value },
 });

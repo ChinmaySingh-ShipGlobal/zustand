@@ -1,29 +1,13 @@
+// store.ts
 import { create } from "zustand";
-import { Product, ProductsState, ProductFormInitialState } from "./interfaces";
+import reducer from "./reducers";
+import { ProductFormInitialState, ProductsState } from "./interfaces";
 
 interface StoreState extends ProductsState {
-  addProduct: (product: Product) => void;
-  removeProduct: (index: number) => void;
-  updateField: (index: number, field: keyof Product, value: string) => void;
+  dispatch: (args: any) => void;
 }
 
 export const useStore = create<StoreState>((set) => ({
-  productForm: ProductFormInitialState.productForm,
-
-  addProduct: (product: Product) =>
-    set((state) => ({
-      productForm: [...state.productForm, product],
-    })),
-
-  removeProduct: (index: number) =>
-    set((state) => ({
-      productForm: state.productForm.filter((_, i) => i !== index),
-    })),
-
-  updateField: (index: number, field: keyof Product, value: string) =>
-    set((state) => ({
-      productForm: state.productForm.map((product, i) =>
-        i === index ? { ...product, [field]: value } : product
-      ),
-    })),
+  ...ProductFormInitialState,
+  dispatch: (args) => set((state) => reducer(state, args)),
 }));
