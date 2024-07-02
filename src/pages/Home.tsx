@@ -1,14 +1,11 @@
-// Home.tsx
 import React from "react";
 import { useStore } from "@/zustand/store";
 import { Product } from "@/zustand/interfaces";
 import { addProduct, removeProduct, updateField } from "@/zustand/actions";
 import ProductItem from "@/PageComponents/ProductItem";
 import { Button } from "@/components/ui/button";
-
 const Home: React.FC = () => {
-  const { productForm } = useStore((state) => state);
-  const dispatch = useStore((state) => state.dispatch);
+  const { productForm, dispatch } = useStore();
 
   const handleAddProduct = () => {
     dispatch(
@@ -48,7 +45,7 @@ const Home: React.FC = () => {
         </div>
       ))}
       <Button
-        className="bg bg-blue text-white px-4 py-2 rounded-md"
+        className="bg-blue text-white px-4 py-2 rounded-md"
         onClick={handleAddProduct}
       >
         Add Product

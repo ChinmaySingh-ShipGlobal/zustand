@@ -1,19 +1,17 @@
-// store.ts
 import { create } from "zustand";
 import reducer from "./reducers";
-// import { ProductFormInitialState, ProductsState } from "./interfaces";
-import { Action, Actions } from "./actions";
 import { Product } from "./interfaces";
+import { Action } from "./actions";
 
 export type StoreState = {
   productForm: Product[];
 };
 
-export const ProductFormInitialState: StoreState = {
-  productForm: [{ prodName: "", cost: "", quantity: "", units: "" }],
-};
+const initialProduct: Product[] = [
+  { prodName: "", cost: "", quantity: "", units: "" },
+];
 
-export const useStore = create<StoreState & Actions>((set) => ({
-  productForm,
+export const useStore = create<StoreState>((set) => ({
+  productForm: initialProduct,
   dispatch: (action: Action) => set((state) => reducer(state, action)),
 }));
