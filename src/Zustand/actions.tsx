@@ -1,24 +1,32 @@
 import { Product } from "./interfaces";
-
-export const ADD_PRODUCT = "ADD_PRODUCT";
-export const REMOVE_PRODUCT = "REMOVE_PRODUCT";
-export const UPDATE_FIELD = "UPDATE_FIELD";
-
-export interface Action {
-  type: string;
-  payload?: any;
+import { ADD_PRODUCT, REMOVE_PRODUCT, UPDATE_FIELD } from "./constants";
+export interface AddProductAction {
+  type: typeof ADD_PRODUCT;
+  payload: Product;
 }
-
+export interface RemoveProductAction {
+  type: typeof REMOVE_PRODUCT;
+  payload: number;
+}
+export interface UpdateFieldAction {
+  type: typeof UPDATE_FIELD;
+  payload: {
+    index: number;
+    field: keyof Product;
+    value: string;
+  };
+}
+export type Action = AddProductAction | RemoveProductAction | UpdateFieldAction;
 export type Actions = {
   dispatch: (action: Action) => void;
 };
 
-export const addProduct = (newProduct: Product) => ({
+export const addProduct = (newProduct: Product): AddProductAction => ({
   type: ADD_PRODUCT,
   payload: newProduct,
 });
 
-export const removeProduct = (index: number) => ({
+export const removeProduct = (index: number): RemoveProductAction => ({
   type: REMOVE_PRODUCT,
   payload: index,
 });
@@ -27,7 +35,7 @@ export const updateField = (
   index: number,
   field: keyof Product,
   value: string
-) => ({
+): UpdateFieldAction => ({
   type: UPDATE_FIELD,
   payload: { index, field, value },
 });
