@@ -1,21 +1,23 @@
 import { Product } from "./interfaces";
 import { ADD_PRODUCT, REMOVE_PRODUCT, UPDATE_FIELD } from "./constants";
-export interface AddProductAction {
+
+type AddProductAction = {
   type: typeof ADD_PRODUCT;
   payload: Product;
-}
-export interface RemoveProductAction {
+};
+type RemoveProductAction = {
   type: typeof REMOVE_PRODUCT;
   payload: number;
-}
-export interface UpdateFieldAction {
+};
+type UpdateFieldAction = {
   type: typeof UPDATE_FIELD;
   payload: {
     index: number;
     field: keyof Product;
     value: string;
   };
-}
+};
+
 export type Action = AddProductAction | RemoveProductAction | UpdateFieldAction;
 export type Actions = {
   dispatch: (action: Action) => void;
